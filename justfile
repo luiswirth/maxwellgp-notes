@@ -1,14 +1,16 @@
-# Compile the document to out/.
+documents := "main foundations"
+
+# Compile the documents to out/.
 build:
     mkdir -p out
-    typst compile src/main.typ out/maxwellgp-notes.pdf --root "$PWD"
+    for d in {{ documents }}; do typst compile src/$d.typ out/$d.pdf --root "$PWD"; done
 
-# Recompile it on every change.
-watch:
+# Recompile one document on every change.
+watch document="main":
     mkdir -p out
-    typst watch src/main.typ out/maxwellgp-notes.pdf --root "$PWD"
+    typst watch src/{{ document }}.typ out/{{ document }}.pdf --root "$PWD"
 
-# Check that the document still compiles, keeping nothing.
+# Check that the documents still compile, keeping nothing.
 ci:
     nix fmt -- --ci
-    typst compile src/main.typ "$(mktemp -d)/maxwellgp-notes.pdf" --root "$PWD"
+    for d in {{ documents }}; do typst compile src/$d.typ "$(mktemp -d)/$d.pdf" --root "$PWD"; done
