@@ -95,7 +95,7 @@
 
 - spacetime $M$, Minkowski $MM$ over $VV = RR^(1,3)$, signature $(-,+,+,+)$
 - spacetime: sections $Omega^p := formsec(p, M)$, calculus
-- spectrum: fiber $formalg(p, VVdualc)$, algebra
+- spectral: fiber $extalg(p) (VVdualc)$, algebra
 
 == Spectral exterior calculus
 
@@ -132,8 +132,8 @@ $
 Spacetime:
 #product-complexes(i => $Omega^#i$, extd, intd)
 
-Spectrum:
-#product-complexes(i => formalg(i, VVdualc), extp, intp)
+Spectral:
+#product-complexes(i => $extalg(i) (VVdualc)$, extp, intp)
 
 #rule-table(
   table.header([*exterior complex*], [*interior complex*]),
@@ -155,12 +155,12 @@ Spacetime:
   columns: 3,
   table.header([], [*exterior*], [*interior*]),
   table.hline(),
-  [no structure], [Poincaré homotopy \ star-shaped domain], [Hodge-conjugate Poincaré homotopy \ star-shaped domain],
-  [metric \ off harmonics], $h = intd lapl^(-1)$, $h = extd lapl^(-1)$,
-  [observer], $h = intp_(partial_t) partial_t^(-1)$, $h = extp_(extd t) partial_t^(-1)$,
+  [no structure], [Primal Poincaré homotopy], [Dual Poincaré homotopy],
+  [off harmonics \ via metric], $h = intd lapl^(-1)$, $h = extd lapl^(-1)$,
+  [on harmonics \ via observer], $h = intp_(partial_t) partial_t^(-1)$, $h = extp_(extd t) partial_t^(-1)$,
 )
 
-Spectrum:
+Spectral:
 #rule-table(
   columns: 3,
   table.header([], [*exterior*], [*interior*]),
@@ -170,9 +170,6 @@ Spectrum:
   [observer \ $omega != 0$], $h = intp_(partial_t) slash inner(k, partial_t)$, $h = extp_(extd t) slash inner(extd t, k^sharp)$,
 )
 
-- antiderivative = the chain read backwards
-- details in the appendix
-
 == Maxwell complex
 
 Spacetime:
@@ -180,46 +177,56 @@ Spacetime:
   ($0$, $Omega^0$, $Omega^1$, $Omega^1$, $Omega^0$, $0$),
   ([], extd, $intd extd$, intd, []),
 )
+$
+  intd extd extd = 0
+  quad
+  intd intd extd = 0
+$
+
 #chain(
   ($0$, $Omega^4$, $Omega^3$, $Omega^3$, $Omega^4$, $0$),
   ([], intd, $extd intd$, extd, []),
 )
+$
+  extd intd intd = 0
+  quad
+  extd extd intd = 0
+$
 
-Spectrum:
+Spectral:
 #chain(
-  ($0$, formalg(0, VVdualc), formalg(1, VVdualc), formalg(1, VVdualc), formalg(0, VVdualc), $0$),
+  ($0$, $extalg(0)$, $extalg(1)$, $extalg(1)$, $extalg(0)$, $0$),
   ([], extp, $intp extp$, intp, []),
 )
+$
+  intp extp extp = 0
+  quad
+  intp intp extp = 0
+$
+
 #chain(
-  ($0$, formalg(4, VVdualc), formalg(3, VVdualc), formalg(3, VVdualc), formalg(4, VVdualc), $0$),
+  ($0$, extalg(4), extalg(3), extalg(3), extalg(4), $0$),
   ([], intp, $extp intp$, extp, []),
 )
+$
+  extp intp intp = 0
+  quad
+  extp extp intp = 0
+$
 
-#rule-table(
-  table.header([*primal Maxwell complex*], [*dual Maxwell complex*]),
-  table.hline(),
-  [primal gauge $chi$], [dual gauge $chi^*$],
-  [primal gauge transformation $extd$], [dual gauge transformation $intd$],
-  [primal potential $pot$], [dual potential $pot^*$],
-  [primal Maxwell operator $intd extd$], [dual Maxwell operator $extd intd$],
-  [primal current $current$], [dual current $current^*$],
-  [primal conservation $intd$], [dual conservation $extd$],
-  [complex \ $intd extd extd = 0, quad intd intd extd = 0$], [complex \ $extd intd intd = 0, quad extd extd intd = 0$],
-  [primal solutions mod primal gauge \ $(ker intd extd) slash (image extd)$], [dual solutions mod dual gauge \ $(ker extd intd) slash (image intd)$],
-  [primal obstructions to sources \ $(ker intd) slash (image intd extd)$], [dual obstructions to sources \ $(ker extd) slash (image extd intd)$],
-)
+solutions mod gauge (position 1)
+$
+  (ker intd extd)/(image extd)
+  quad
+  (ker extd intd)/(image intd)
+$
 
-- $hodge$ maps each complex onto the other
-
-Spectral homology, both complexes, $k != 0$:
-#rule-table(
-  columns: 5,
-  align: center,
-  table.header([], [position 0], [position 1], [position 2], [position 3]),
-  table.hline(),
-  [off the light cone], $0$, $0$, $0$, $0$,
-  [on the light cone], $0$, $2$, $2$, $0$,
-)
+obstructions to sources (position 2)
+$
+  (ker intd)/(image intd extd)
+  quad
+  (ker extd)/(image extd intd)
+$
 
 #pagebreak(weak: true)
 
@@ -229,13 +236,13 @@ Spacetime:
 #hertz-diagram()
 #v(1em)
 
-Spectrum:
+Spectral:
 #hertz-diagram(spectral: true)
 #v(1em)
 
 #rule-table(
   columns: 3,
-  table.header([], [*spacetime*], [*spectrum*]),
+  table.header([], [*spacetime*], [*spectral*]),
   table.hline(),
   [primal Hertz path], $pot = intd hertz, quad field = extd pot$, $ft(pot) = intdk ft(hertz), quad ft(field) = extdk ft(pot)$,
   [dual Hertz path], $pot^* = -extd hertz, quad field = intd pot^*$, $ft(pot)^* = -extdk ft(hertz), quad ft(field) = intdk ft(pot)^*$,
@@ -262,7 +269,7 @@ Spectrum:
 == Polarization space
 
 $
-  image P = ker extp inter ker intp inter formalg(2, VVdualc),
+  image P = ker extp inter ker intp inter extalg(2) (VVdualc),
   quad
   P = extdk intdk = extp intp = -intp extp,
   quad
@@ -273,16 +280,16 @@ $
   columns: 3,
   table.header([*reading*], [*space*], [*count*]),
   table.hline(),
-  [primal Maxwell homology \ via $extp$], $(ker intp inter formalg(1, VVdualc)) / (extp formalg(0, VVdualc))$, $4 - 1 - 1$,
-  [dual Maxwell homology \ via $intp$], $(ker extp inter formalg(3, VVdualc)) / (intp formalg(4, VVdualc))$, $4 - 1 - 1$,
-  [Hertz gauge quotient \ via $P$], $formalg(2, VVdualc) / (extp formalg(1, VVdualc) + intp formalg(3, VVdualc))$, $6 - 4$,
+  [primal Maxwell homology \ via $extp$], $(ker intp inter extalg(1) (VVdualc)) / (extp extalg(0) (VVdualc))$, $4 - 1 - 1$,
+  [dual Maxwell homology \ via $intp$], $(ker extp inter extalg(3) (VVdualc)) / (intp extalg(4) (VVdualc))$, $4 - 1 - 1$,
+  [Hertz gauge quotient \ via $P$], $extalg(2) (VVdualc) / (extp extalg(1) (VVdualc) + intp extalg(3) (VVdualc))$, $6 - 4$,
 )
 
 Polarization theorem:
 $
-  extp (ker intp inter formalg(1, VVdualc))
+  extp (ker intp inter extalg(1) (VVdualc))
   = image P =
-  intp (ker extp inter formalg(3, VVdualc)).
+  intp (ker extp inter extalg(3) (VVdualc)).
 $
 
 #rule-table(
@@ -329,14 +336,6 @@ $
 
 - standard Gaussian Hertz potential pushed through $P$: same prior up to scale, checked numerically
 - the observer enters only through $omega$
-
-#pagebreak()
-
-= Follow-up paper
-
-#pagebreak()
-
-= Completing MaxwellGP
 
 #pagebreak()
 

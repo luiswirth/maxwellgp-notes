@@ -23,15 +23,21 @@
 #let MM = $bb(M)$
 #let VV = $bb(V)$
 #let VVdualc = $bb(V)^*_bb(C)$
+
 #let lightcone = $cal(C)$
-#let formsec(p, m) = $Gamma(Lambda^#p upright(T)^* #m)$
-#let formalg(p, v) = $Lambda^#p (#v)$
-#let iu = $upright(i)$
-#let extd = dif
-#let intd = codif
+
+#let extalg(p) = $Lambda^#p$
+#let formsec(p, m) = $Gamma(extalg(p) upright(T)^* #m)$
+
 #let extp = $upright(epsilon)$
 #let intp = $upright(iota)$
-#let dirac = $upright(D)$
+
+#let extd = dif
+#let intd = codif
+#let dirac = $upright(Dif)$
+
+#let iu = $upright(i)$
+
 #let hertzop = $upright(H)$
 #let ft(a) = $hat(#a)$
 #let image = math.op("Im")
